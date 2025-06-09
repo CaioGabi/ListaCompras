@@ -5,31 +5,52 @@ import { Feather } from '@expo/vector-icons';
 type Item = {
   nome: string;
   valor: string;
+  comprado?: boolean;
 };
 
 type ListaComprasProps = {
   itens: Item[];
   removerItem: (index: number) => void;
+  alternarComprado: (index: number) => void; // novo prop
 };
 
-const ListaCompras: React.FC<ListaComprasProps> = ({ itens, removerItem }) => (
+const ListaCompras: React.FC<ListaComprasProps> = ({ itens, removerItem, alternarComprado }) => (
   <FlatList
     data={itens}
     keyExtractor={(_, index) => index.toString()}
     renderItem={({ item, index }) => (
       <View style={styles.itemContainer}>
+        <TouchableOpacity onPress={() => alternarComprado(index)} style={styles.checkButton}>
+          <Feather
+            name={item.comprado ? "check-circle" : "circle"}
+            size={24}
+            color={item.comprado ? "#28A745" : "#BDBDBD"}
+          />
+        </TouchableOpacity>
         <View style={styles.itemInfo}>
-          <Text style={styles.itemText}>{item.nome}</Text>
-          <Text style={styles.valorText}>R$ {item.valor}</Text>
+          <Text
+            style={[
+              styles.itemText,
+              item.comprado && { textDecorationLine: 'line-through', color: '#BDBDBD' }
+            ]}
+          >
+            {item.nome}
+          </Text>
+          <Text
+            style={[
+              styles.valorText,
+              item.comprado && { color: '#BDBDBD', textDecorationLine: 'line-through' }
+            ]}
+          >
+            R$ {item.valor}
+          </Text>
         </View>
         <TouchableOpacity onPress={() => removerItem(index)} style={styles.removeButton}>
           <Feather name="trash-2" size={22} color="#D32F2F" />
         </TouchableOpacity>
       </View>
     )}
-
     ListEmptyComponent={<Text style={styles.emptyListText}>Sua lista está vazia!</Text>}
-
     ListFooterComponent={<View style={{ height: 20 }} />}
   />
 );
@@ -50,6 +71,9 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.08,
     shadowRadius: 3,
+  },
+  checkButton: {
+    marginRight: 12,
   },
   itemInfo: {
     flex: 1,

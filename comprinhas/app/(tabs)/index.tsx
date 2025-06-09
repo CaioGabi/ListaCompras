@@ -7,6 +7,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 type Item = {
   nome: string;
   valor: string;
+  comprado?: boolean; // novo campo
 };
 
 export default function ExploreScreen() {
@@ -14,12 +15,21 @@ export default function ExploreScreen() {
 
   const adicionarItem = (novoItem: Item) => {
     if (novoItem.nome.trim() !== '' && novoItem.valor.trim() !== '') {
-      setItens([...itens, novoItem]);
+      setItens([...itens, { ...novoItem, comprado: false }]);
     }
   };
 
   const removerItem = (index: number) => {
     setItens(itens.filter((_, i) => i !== index));
+  };
+
+  // Função para marcar/desmarcar como comprado
+  const alternarComprado = (index: number) => {
+    setItens(itens =>
+      itens.map((item, i) =>
+        i === index ? { ...item, comprado: !item.comprado } : item
+      )
+    );
   };
 
   return (
@@ -31,12 +41,11 @@ export default function ExploreScreen() {
           <Text style={styles.header}>Minha Lista de Compras</Text>
         </View>
         <FormsLista adicionarItem={adicionarItem} />
-        <ListaCompras itens={itens} removerItem={removerItem} />
+        <ListaCompras itens={itens} removerItem={removerItem} alternarComprado={alternarComprado} />
       </View>
     </SafeAreaView>
   );
 }
-
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
