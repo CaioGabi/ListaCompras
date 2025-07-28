@@ -10,7 +10,7 @@ type Item = {
   comprado?: boolean; // novo campo
 };
 
-export default function ExploreScreen() {
+export default function Home() {
   const [itens, setItens] = useState<Item[]>([]);
 
   const adicionarItem = (novoItem: Item) => {
