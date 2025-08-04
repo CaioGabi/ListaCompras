@@ -1,5 +1,5 @@
-import FormsLista from '@/components/FormsLista';
-import ListaCompras from '@/components/ListaCompras';
+import FormsLista from '../components/FormsLista';
+import ListaCompras from '../components/ListaCompras';
 import React, { useState } from 'react';
 import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
