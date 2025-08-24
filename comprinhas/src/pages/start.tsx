@@ -1,16 +1,15 @@
 import React from 'react';
 import { SafeAreaView, StatusBar, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-// 1. Importe o hook useRouter do Expo Router
-import { useRouter } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Start() {
-  // 2. Crie uma instância do router usando o hook
-  const router = useRouter();
+
+  const navigation = useNavigation();
 
   const handleNavigateToList = () => {
-    // 3. Use router.push() para navegar para a tela 'home'
-    router.push('../src/pages/home'); // ERRo
+
+    navigation.navigate('Home' as never); //AS NEVER PARA EVITAR ERRO DE TIPAGEM (Corrigir mais tarde  )
   };
 
   return (
@@ -18,7 +17,7 @@ export default function Start() {
       <StatusBar barStyle="dark-content" backgroundColor="#f0f4f8" />
 
       <View style={styles.content}>
-        <MaterialCommunityIcons name="cart-variant" size={120} color="#3498db" />
+        <MaterialCommunityIcons name="cart-variant" size={120} color="#dfc11cff" />
         <Text style={styles.title}>Sua Lista de Compras</Text>
         <Text style={styles.subtitle}>Organize suas compras de forma fácil e rápida.</Text>
       </View>
@@ -34,7 +33,7 @@ export default function Start() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f4f8',
+    backgroundColor: '#edf1a8ff',
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: 20,
@@ -59,7 +58,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   button: {
-    backgroundColor: '#3498db',
+    backgroundColor: '#dfc11cff',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

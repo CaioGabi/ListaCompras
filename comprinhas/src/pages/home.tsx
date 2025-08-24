@@ -7,7 +7,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 type Item = {
   nome: string;
   valor: string;
-  comprado?: boolean; // novo campo
+  comprado?: boolean; 
 };
 
 export default function Home() {
@@ -34,7 +34,7 @@ export default function Home() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="light-content" backgroundColor="#2E7D32" />
+      <StatusBar barStyle="light-content" backgroundColor="#dfc11cff" />
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <MaterialCommunityIcons name="cart-outline" size={32} color="#FFFFFF" />
@@ -49,7 +49,7 @@ export default function Home() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#F8F9FA',
+    backgroundColor: '#edf1a8ff',
 
   },
   container: {
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#2E7D32', 
+    backgroundColor: '#dfc11cff', 
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 12,

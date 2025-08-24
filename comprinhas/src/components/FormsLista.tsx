@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   addButton: {
-    backgroundColor: '#28A745', // Verde para ação positiva
+    backgroundColor: '#dfc11cff', 
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

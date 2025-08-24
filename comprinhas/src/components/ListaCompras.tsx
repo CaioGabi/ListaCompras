@@ -24,7 +24,7 @@ const ListaCompras: React.FC<ListaComprasProps> = ({ itens, removerItem, alterna
           <Feather
             name={item.comprado ? "check-circle" : "circle"}
             size={24}
-            color={item.comprado ? "#28A745" : "#BDBDBD"}
+            color={item.comprado ? "#dfc11cff" : "#BDBDBD"}
           />
         </TouchableOpacity>
         <View style={styles.itemInfo}>
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   },
   valorText: {
     fontSize: 16,
-    color: '#2E7D32',
+    color: '#dfc11cff',
     fontWeight: 'bold',
     marginTop: 4,
   },
