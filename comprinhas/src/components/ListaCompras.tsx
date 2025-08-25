@@ -11,7 +11,7 @@ type Item = {
 type ListaComprasProps = {
   itens: Item[];
   removerItem: (index: number) => void;
-  alternarComprado: (index: number) => void; // novo prop
+  alternarComprado: (index: number) => void; 
 };
 
 const ListaCompras: React.FC<ListaComprasProps> = ({ itens, removerItem, alternarComprado }) => (
@@ -24,7 +24,7 @@ const ListaCompras: React.FC<ListaComprasProps> = ({ itens, removerItem, alterna
           <Feather
             name={item.comprado ? "check-circle" : "circle"}
             size={24}
-            color={item.comprado ? "#dfc11cff" : "#BDBDBD"}
+            color={item.comprado ? "#000000" : "#BDBDBD"}
           />
         </TouchableOpacity>
         <View style={styles.itemInfo}>
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   },
   valorText: {
     fontSize: 16,
-    color: '#dfc11cff',
+    color: '#B0DB9C',
     fontWeight: 'bold',
     marginTop: 4,
   },

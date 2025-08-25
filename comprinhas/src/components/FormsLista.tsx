@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   addButton: {
-    backgroundColor: '#dfc11cff', 
+    backgroundColor: '#B0DB9C', 
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

@@ -1,8 +1,9 @@
 import FormsLista from '../components/FormsLista';
 import ListaCompras from '../components/ListaCompras';
 import React, { useState } from 'react';
-import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StatusBar, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { styles } from '../styles/home.styles';
 
 type Item = {
   nome: string;
@@ -46,35 +47,3 @@ export default function Home() {
     </SafeAreaView>
   );
 }
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: '#edf1a8ff',
-
-  },
-  container: {
-    flex: 1,
-    padding: 20,
-  },
-  headerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#dfc11cff', 
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    borderRadius: 12,
-    marginBottom: 25,
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-  },
-  header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-    marginLeft: 10,
-  },
-});
