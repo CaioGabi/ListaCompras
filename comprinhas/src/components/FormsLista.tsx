@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Alert, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import ButtonText from "./ButtonText";
 
 type Item = {
   nome: string;
@@ -59,7 +60,7 @@ const FormsLista: React.FC<FormsListaProps> = ({ adicionarItem }) => {
       />
       <TouchableOpacity style={styles.addButton} onPress={handleAdicionar} activeOpacity={0.7}>
         <Ionicons name="add-circle-outline" size={24} color="#FFFFFF" />
-        <Text style={styles.addButtonText}>Adicionar à Lista</Text>
+        <ButtonText text="Adicionar à Lista"/>
       </TouchableOpacity>
     </View>
   );
@@ -103,12 +104,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
-  },
-  addButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginLeft: 8,
   },
 });
 

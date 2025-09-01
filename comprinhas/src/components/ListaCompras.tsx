@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import InfoText from './InfoText';
 
 type Item = {
   nome: string;
@@ -50,7 +51,7 @@ const ListaCompras: React.FC<ListaComprasProps> = ({ itens, removerItem, alterna
         </TouchableOpacity>
       </View>
     )}
-    ListEmptyComponent={<Text style={styles.emptyListText}>Sua lista está vazia!</Text>}
+    ListEmptyComponent={<InfoText text="Sua lista está vazia!"/>}
     ListFooterComponent={<View style={{ height: 20 }} />}
   />
 );
@@ -92,12 +93,6 @@ const styles = StyleSheet.create({
   removeButton: {
     padding: 8,
     marginLeft: 10,
-  },
-  emptyListText: {
-    textAlign: 'center',
-    marginTop: 40,
-    fontSize: 16,
-    color: '#6C757D',
   },
 });
 

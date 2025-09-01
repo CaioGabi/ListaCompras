@@ -3,6 +3,8 @@ import { SafeAreaView, StatusBar, Text, View, TouchableOpacity } from 'react-nat
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from '../styles/start.styles';
+import ButtonText from '../components/ButtonText';
+import InfoText from '../components/InfoText';
 
 export default function Start() {
 
@@ -20,11 +22,11 @@ export default function Start() {
       <View style={styles.content}>
         <MaterialCommunityIcons name="cart-variant" size={120} color="#000000" />
         <Text style={styles.title}>Sua Lista de Compras</Text>
-        <Text style={styles.subtitle}>Organize suas compras de forma fácil e rápida.</Text>
+        <InfoText text="Organize a sua lista de compras de forma rápida e fácil"/>
       </View>
 
       <TouchableOpacity style={styles.button} onPress={handleNavigateToList}>
-        <Text style={styles.buttonText}>Ir para a Lista</Text>
+        <ButtonText text="Ir para a Lista"/>
         <MaterialCommunityIcons name="arrow-right-thick" size={22} color="#fff" />
       </TouchableOpacity>
     </SafeAreaView>
