@@ -1,7 +1,8 @@
-import React from 'react';
-import { FlatList, StyleSheet, Text, TouchableOpacity, View, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import InfoText from './InfoText';
+import Alert from './Alert'; 
 
 type Item = {
   nome: string;
@@ -16,65 +17,80 @@ type ListaComprasProps = {
 };
 
 const ListaCompras: React.FC<ListaComprasProps> = ({ itens, removerItem, alternarComprado }) => {
-  
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [itemToRemove, setItemToRemove] = useState<Item | null>(null);
+  const [indexToRemove, setIndexToRemove] = useState<number | null>(null);
+
   const handleRemoverItem = (item: Item, index: number) => {
-    Alert.alert(
-      "Excluir Item",
-      `Tem certeza que deseja remover "${item.nome}" da lista?`,
-      [
-        {
-          text: "Cancelar",
-          style: "cancel"
-        },
-        {
-          text: "Excluir",
-          onPress: () => removerItem(index),
-          style: "destructive"
-        }
-      ],
-      { cancelable: true }
-    );
+    setItemToRemove(item);
+    setIndexToRemove(index);
+    setIsModalVisible(true);
+  };
+
+  const confirmRemoval = () => {
+    if (indexToRemove !== null) {
+      removerItem(indexToRemove);
+    }
+    setIsModalVisible(false);
+    setItemToRemove(null);
+    setIndexToRemove(null);
+  };
+
+  const cancelRemoval = () => {
+    setIsModalVisible(false);
+    setItemToRemove(null);
+    setIndexToRemove(null);
   };
 
   return (
-    <FlatList
-      data={itens}
-      keyExtractor={(_, index) => index.toString()}
-      renderItem={({ item, index }) => (
-        <View style={styles.itemContainer}>
-          <TouchableOpacity onPress={() => alternarComprado(index)} style={styles.checkButton}>
-            <Feather
-              name={item.comprado ? "check-circle" : "circle"}
-              size={24}
-              color={item.comprado ? "#000000" : "#BDBDBD"}
-            />
-          </TouchableOpacity>
-          <View style={styles.itemInfo}>
-            <Text
-              style={[
-                styles.itemText,
-                item.comprado && { textDecorationLine: 'line-through', color: '#BDBDBD' }
-              ]}
-            >
-              {item.nome}
-            </Text>
-            <Text
-              style={[
-                styles.valorText,
-                item.comprado && { color: '#BDBDBD', textDecorationLine: 'line-through' }
-              ]}
-            >
-              R$ {item.valor}
-            </Text>
+    <>
+      <FlatList
+        data={itens}
+        keyExtractor={(_, index) => index.toString()}
+        renderItem={({ item, index }) => (
+          <View style={styles.itemContainer}>
+            <TouchableOpacity onPress={() => alternarComprado(index)} style={styles.checkButton}>
+              <Feather
+                name={item.comprado ? "check-circle" : "circle"}
+                size={24}
+                color={item.comprado ? "#000000" : "#BDBDBD"}
+              />
+            </TouchableOpacity>
+            <View style={styles.itemInfo}>
+              <Text
+                style={[
+                  styles.itemText,
+                  item.comprado && { textDecorationLine: 'line-through', color: '#BDBDBD' }
+                ]}
+              >
+                {item.nome}
+              </Text>
+              <Text
+                style={[
+                  styles.valorText,
+                  item.comprado && { color: '#BDBDBD', textDecorationLine: 'line-through' }
+                ]}
+              >
+                R$ {item.valor}
+              </Text>
+            </View>
+            <TouchableOpacity onPress={() => handleRemoverItem(item, index)} style={styles.removeButton}>
+              <Feather name="trash-2" size={22} color="#D32F2F" />
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={() => handleRemoverItem(item, index)} style={styles.removeButton}>
-            <Feather name="trash-2" size={22} color="#D32F2F" />
-          </TouchableOpacity>
-        </View>
-      )}
-      ListEmptyComponent={<InfoText text="Sua lista está vazia!"/>}
-      ListFooterComponent={<View style={{ height: 20 }} />}
-    />
+        )}
+        ListEmptyComponent={<InfoText text="Sua lista está vazia!"/>}
+        ListFooterComponent={<View style={{ height: 20 }} />}
+      />
+
+      <Alert
+        isVisible={isModalVisible}
+        title="Excluir Item"
+        message={`Tem certeza que deseja remover "${itemToRemove?.nome}" da lista?`}
+        onConfirm={confirmRemoval}
+        onCancel={cancelRemoval}
+      />
+    </>
   );
 };
 
