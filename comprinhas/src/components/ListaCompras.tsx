@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, StyleSheet, Text, TouchableOpacity, View, Alert } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import InfoText from './InfoText';
 
@@ -12,49 +12,71 @@ type Item = {
 type ListaComprasProps = {
   itens: Item[];
   removerItem: (index: number) => void;
-  alternarComprado: (index: number) => void; 
+  alternarComprado: (index: number) => void;
 };
 
-const ListaCompras: React.FC<ListaComprasProps> = ({ itens, removerItem, alternarComprado }) => (
-  <FlatList
-    data={itens}
-    keyExtractor={(_, index) => index.toString()}
-    renderItem={({ item, index }) => (
-      <View style={styles.itemContainer}>
-        <TouchableOpacity onPress={() => alternarComprado(index)} style={styles.checkButton}>
-          <Feather
-            name={item.comprado ? "check-circle" : "circle"}
-            size={24}
-            color={item.comprado ? "#000000" : "#BDBDBD"}
-          />
-        </TouchableOpacity>
-        <View style={styles.itemInfo}>
-          <Text
-            style={[
-              styles.itemText,
-              item.comprado && { textDecorationLine: 'line-through', color: '#BDBDBD' }
-            ]}
-          >
-            {item.nome}
-          </Text>
-          <Text
-            style={[
-              styles.valorText,
-              item.comprado && { color: '#BDBDBD', textDecorationLine: 'line-through' }
-            ]}
-          >
-            R$ {item.valor}
-          </Text>
+const ListaCompras: React.FC<ListaComprasProps> = ({ itens, removerItem, alternarComprado }) => {
+  
+  const handleRemoverItem = (item: Item, index: number) => {
+    Alert.alert(
+      "Excluir Item",
+      `Tem certeza que deseja remover "${item.nome}" da lista?`,
+      [
+        {
+          text: "Cancelar",
+          style: "cancel"
+        },
+        {
+          text: "Excluir",
+          onPress: () => removerItem(index),
+          style: "destructive"
+        }
+      ],
+      { cancelable: true }
+    );
+  };
+
+  return (
+    <FlatList
+      data={itens}
+      keyExtractor={(_, index) => index.toString()}
+      renderItem={({ item, index }) => (
+        <View style={styles.itemContainer}>
+          <TouchableOpacity onPress={() => alternarComprado(index)} style={styles.checkButton}>
+            <Feather
+              name={item.comprado ? "check-circle" : "circle"}
+              size={24}
+              color={item.comprado ? "#000000" : "#BDBDBD"}
+            />
+          </TouchableOpacity>
+          <View style={styles.itemInfo}>
+            <Text
+              style={[
+                styles.itemText,
+                item.comprado && { textDecorationLine: 'line-through', color: '#BDBDBD' }
+              ]}
+            >
+              {item.nome}
+            </Text>
+            <Text
+              style={[
+                styles.valorText,
+                item.comprado && { color: '#BDBDBD', textDecorationLine: 'line-through' }
+              ]}
+            >
+              R$ {item.valor}
+            </Text>
+          </View>
+          <TouchableOpacity onPress={() => handleRemoverItem(item, index)} style={styles.removeButton}>
+            <Feather name="trash-2" size={22} color="#D32F2F" />
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={() => removerItem(index)} style={styles.removeButton}>
-          <Feather name="trash-2" size={22} color="#D32F2F" />
-        </TouchableOpacity>
-      </View>
-    )}
-    ListEmptyComponent={<InfoText text="Sua lista está vazia!"/>}
-    ListFooterComponent={<View style={{ height: 20 }} />}
-  />
-);
+      )}
+      ListEmptyComponent={<InfoText text="Sua lista está vazia!"/>}
+      ListFooterComponent={<View style={{ height: 20 }} />}
+    />
+  );
+};
 
 const styles = StyleSheet.create({
   itemContainer: {

@@ -12,7 +12,7 @@ export default function Start() {
 
   const handleNavigateToList = () => {
 
-    navigation.navigate('Home' as never);
+    navigation.navigate('TasksPage' as never);
   };
 
   return (

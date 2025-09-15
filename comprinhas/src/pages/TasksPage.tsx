@@ -3,7 +3,7 @@ import ListaCompras from '../components/ListaCompras';
 import React, { useState } from 'react';
 import { SafeAreaView, StatusBar, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { styles } from '../styles/home.styles';
+import { styles } from '../styles/taskspage.styles';
 
 type Item = {
   nome: string;
@@ -11,7 +11,7 @@ type Item = {
   comprado?: boolean; 
 };
 
-export default function Home() {
+export default function TasksPage() {
   const [itens, setItens] = useState<Item[]>([]);
 
   const adicionarItem = (novoItem: Item) => {
@@ -24,7 +24,6 @@ export default function Home() {
     setItens(itens.filter((_, i) => i !== index));
   };
 
-  // Função para marcar/desmarcar como comprado
   const alternarComprado = (index: number) => {
     setItens(itens =>
       itens.map((item, i) =>

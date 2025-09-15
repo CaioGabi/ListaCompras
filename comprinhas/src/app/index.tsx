@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from '../pages/home';
+import TasksPage from '../pages/TasksPage';
 import Start from '../pages/start';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -17,8 +17,8 @@ export default function AppLayout() {
 
       {/* Tela do CRUD */}
       <Stack.Screen
-        name="Home"
-        component={Home}
+        name="TasksPage"
+        component={TasksPage}
         options={{ title: 'Lista de Compras' }}
       />
     </Stack.Navigator>
